@@ -27,7 +27,12 @@ def assign_food_items(table_number, **order_items):
   tables[table_number]['order']['food_items'] = food
   tables[table_number]['order']['drinks'] = drinks
 
-def calculate_price_per_person(total, tip, split):
+def calculate_price_per_person(table_number, total, tip, split):
     total_tip = total * (tip/100)
     split_price = (total + total_tip) / split
-    print(split_price)
+    print('Each person has to pay', split_price)
+    total_order = 0
+    for n in tables[table_number]['order']['total']:
+        total_order = n
+        break
+    print('The total count is', total_order)    
