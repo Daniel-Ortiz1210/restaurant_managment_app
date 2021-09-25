@@ -27,6 +27,7 @@ def assign_food_items(table_number, **order_items):
   tables[table_number]['order']['food_items'] = food
   tables[table_number]['order']['drinks'] = drinks
 
-assign_table(2, 'Daniel', True)
-assign_food_items(2, drinks='Diet Coke', food_items='Burger with Fries')
-print(tables)
+def calculate_price_per_person(total, tip, split):
+    total_tip = total * (tip/100)
+    split_price = (total + total_tip) / split
+    print(split_price)
