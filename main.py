@@ -60,19 +60,24 @@ def main():
       names = input('Escriba el nombre de los comensales con apellidos (separados por ", "): ').title().strip().split(', ')
       vip_status = input('¿Presentan acceso VIP? (S/N): ').upper()
       assign_table(table_number, names, vip_status)
-      break
+      user = input('¿Qué desea hacer ahora?: ')
+      continue
     elif user == '2':
       print('Esta es opción 2')
-      break
+      user = input('¿Qué desea hacer ahora?: ')
+      continue
     elif user == '3':
       print('Esta es opción 3')
-      break
+      user = input('¿Qué desea hacer ahora?: ')
+      continue
     elif user == '4':
       print('Esta es opción 4')
-      break
+      user = input('¿Qué desea hacer ahora?: ')
+      continue
     elif user == '5':
       print('Esta es opción 5')
-      break
+      user = input('¿Qué desea hacer ahora?: ')
+      continue
     elif user == '6':
       print('Cerrando sesión...')
       print('Completado. Nos vemos pronto.')
