@@ -47,29 +47,30 @@ def calculate_price_per_person(table_number, total, tip, split):
 
 def user_option():
   user = int(input('Qué deseas hacer?: '))
-  while user > 6:
+  while user > 7:
     user = int(input('Escribe una opción valida: '))
   return user
 
 def main():
   print(
     '''
-    1. Para asignar una mesa
-    2. Para tomar una orden
-    3. Para calcular la cuenta de una mesa
-    4. Para consultar el status de una mesa
-    5. Para consultar el status de todas las mesas
-    6. Para salir del programa
+    1. Asignar una mesa
+    2. Tomar una orden
+    3. Calcular la cuenta de una mesa
+    4. Consultar el status de una mesa
+    5. Consultar el status de todas las mesas
+    6. Desocupar una mesa
+    7. Para salir del programa
     '''
   )
   user = user_option()
-  while user == 1 or user == 2 or user == 3 or user == 4 or user == 5 or user == 6:
+  while user == 1 or user == 2 or user == 3 or user == 4 or user == 5 or user == 6 or user == 7:
     if user == 1:
       table_number = int(input('Escriba el número de mesa: '))
       names = input('Escriba el nombre de los comensales con apellidos (separados por ", "): ').title().strip().split(', ')
       vip_status = input('¿Presentan acceso VIP? (S/N): ').upper()
       assign_table(table_number, names, vip_status)
-      user = input('¿Qué desea hacer ahora?: ')
+      user = int(input('¿Qué deseas hacer ahora?: '))
       continue
     elif user == 2:
       try:
@@ -79,21 +80,29 @@ def main():
         assign_food_items(table_number, food=order_food, drinks=order_drinks)
       except KeyError:
         print('No hay comensales en esta mesa. Primero asigna a un comensal y despúes toma la orden.\nAcciones sugeridas: Asignar una mesa (1).')
-      user = input('¿Qué desea hacer ahora?: ')
+      user = int(input('¿Qué deseas hacer ahora?: '))
       continue
     elif user == 3:
       print('Esta es opción 3')
-      user = input('¿Qué desea hacer ahora?: ')
+      user = int(input('¿Qué deseas hacer ahora?: '))
       continue
     elif user == 4:
       print('Esta es opción 4')
-      user = input('¿Qué desea hacer ahora?: ')
+      user = int(input('¿Qué deseas hacer ahora?: '))
       continue
     elif user == 5:
       print('Esta es opción 5')
-      user = input('¿Qué desea hacer ahora?: ')
+      user = int(input('¿Qué deseas hacer ahora?: '))
       continue
     elif user == 6:
+      print('Esta es la opción 6')
+      user = int(input('¿Qué deseas hacer ahora?: '))
+      continue
+    elif user == 7:
+      confirmation = input('¿Estás seguro qué deseas salir? (S/N): ').lower()
+      if confirmation == 'no':
+        user = user_option()
+        continue
       print('Cerrando sesión...')
       print('Completado. Nos vemos pronto.')
       break
