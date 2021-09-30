@@ -24,16 +24,16 @@ def assign_table(table_number, name, vip_status=False):
   tables[table_number]['name'] = name
   tables[table_number]['vip_status'] = vip_status
   tables[table_number]['order'] = {}
-  print('... .... ....\n')
-  print('¡Mesa asignada correctamente!')
+  print('... .... ....')
+  print('¡Mesa asignada correctamente!\n')
 
 def assign_food_items(table_number, **order_items):
   food = order_items.get('food')
   drinks = order_items.get('drinks')
   tables[table_number]['order']['food_items'] = food
   tables[table_number]['order']['drinks'] = drinks
-  print('... .... ....\n')
-  print('¡Orden tomada con éxito!')
+  print('... .... ....')
+  print('¡Orden tomada con éxito!\n')
 
 def calculate_price_per_person(table_number, total, tip, split):
     total_tip = total * (tip/100)
@@ -44,7 +44,13 @@ def calculate_price_per_person(table_number, total, tip, split):
         total_order = n
         break
     print('The total count is', total_order)
-  
+
+def user_option():
+  user = int(input('Qué deseas hacer?: '))
+  while user > 6:
+    user = int(input('Escribe una opción valida: '))
+  return user
+
 def main():
   print(
     '''
@@ -56,16 +62,16 @@ def main():
     6. Para salir del programa
     '''
   )
-  user = input('Qué deseas hacer?: ')
-  while user == '1' or user == '2' or user == '3' or user == '4' or user == '5' or user == '6':
-    if user == '1':
+  user = user_option()
+  while user == 1 or user == 2 or user == 3 or user == 4 or user == 5 or user == 6:
+    if user == 1:
       table_number = int(input('Escriba el número de mesa: '))
       names = input('Escriba el nombre de los comensales con apellidos (separados por ", "): ').title().strip().split(', ')
       vip_status = input('¿Presentan acceso VIP? (S/N): ').upper()
       assign_table(table_number, names, vip_status)
       user = input('¿Qué desea hacer ahora?: ')
       continue
-    elif user == '2':
+    elif user == 2:
       try:
         table_number = int(input('Escriba el número de mesa: '))
         order_food = input('¿Qué alimentos desea ordenar el cliente?: ')
@@ -75,19 +81,19 @@ def main():
         print('No hay comensales en esta mesa. Primero asigna a un comensal y despúes toma la orden.\nAcciones sugeridas: Asignar una mesa (1).')
       user = input('¿Qué desea hacer ahora?: ')
       continue
-    elif user == '3':
+    elif user == 3:
       print('Esta es opción 3')
       user = input('¿Qué desea hacer ahora?: ')
       continue
-    elif user == '4':
+    elif user == 4:
       print('Esta es opción 4')
       user = input('¿Qué desea hacer ahora?: ')
       continue
-    elif user == '5':
+    elif user == 5:
       print('Esta es opción 5')
       user = input('¿Qué desea hacer ahora?: ')
       continue
-    elif user == '6':
+    elif user == 6:
       print('Cerrando sesión...')
       print('Completado. Nos vemos pronto.')
       break
