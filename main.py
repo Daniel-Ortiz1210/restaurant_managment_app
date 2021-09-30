@@ -24,6 +24,7 @@ def assign_table(table_number, name, vip_status=False):
   tables[table_number]['name'] = name
   tables[table_number]['vip_status'] = vip_status
   tables[table_number]['order'] = {}
+  print('... .... ....\n')
   print('¡Mesa asignada correctamente!')
 
 def assign_food_items(table_number, **order_items):
@@ -31,6 +32,8 @@ def assign_food_items(table_number, **order_items):
   drinks = order_items.get('drinks')
   tables[table_number]['order']['food_items'] = food
   tables[table_number]['order']['drinks'] = drinks
+  print('... .... ....\n')
+  print('¡Orden tomada con éxito!')
 
 def calculate_price_per_person(table_number, total, tip, split):
     total_tip = total * (tip/100)
@@ -63,7 +66,13 @@ def main():
       user = input('¿Qué desea hacer ahora?: ')
       continue
     elif user == '2':
-      print('Esta es opción 2')
+      try:
+        table_number = int(input('Escriba el número de mesa: '))
+        order_food = input('¿Qué alimentos desea ordenar el cliente?: ')
+        order_drinks = input('¿Qué bebidas desea ordenar el cliente?: ')
+        assign_food_items(table_number, food=order_food, drinks=order_drinks)
+      except KeyError:
+        print('No hay comensales en esta mesa. Primero asigna a un comensal y despúes toma la orden.\nAcciones sugeridas: Asignar una mesa (1).')
       user = input('¿Qué desea hacer ahora?: ')
       continue
     elif user == '3':
