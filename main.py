@@ -25,7 +25,7 @@ def assign_table(table_number, name, vip_status=False):
   tables[table_number]['vip_status'] = vip_status
   tables[table_number]['order'] = {}
   print('... .... ....')
-  print('¡Mesa asignada correctamente!\n')
+  print('¡Mesa {} asignada correctamente!\n'.format(table_number))
 
 def assign_food_items(table_number, **order_items):
   food = order_items.get('food')
@@ -35,18 +35,12 @@ def assign_food_items(table_number, **order_items):
   print('... .... ....')
   print('¡Orden tomada con éxito!\n')
 
-def calculate_price_per_person(table_number, total, tip, split):
-    total_tip = total * (tip/100)
-    split_price = (total + total_tip) / split
-    print('Each person has to pay', split_price)
-    total_order = 0
-    for n in tables[table_number]['order']['total']:
-        total_order = n
-        break
-    print('The total count is', total_order)
+def calculate_total_count_and_per_person(table_number, total, tip):
+    price_per_person = (total + tip) / len(tables[table_number]['name'])
+    print('La cuenta total de la mesa {} es ${} pesos mexicanos.\nA cada persona le toca pagar ${} pesos mexicanos.'.format(table_number, total,price_per_person))
 
 def user_option():
-  user = int(input('Qué deseas hacer?: '))
+  user = int(input('¿Qué deseas hacer?: '))
   while user > 7:
     user = int(input('Escribe una opción valida: '))
   return user
@@ -83,7 +77,13 @@ def main():
       user = int(input('¿Qué deseas hacer ahora?: '))
       continue
     elif user == 3:
-      print('Esta es opción 3')
+      try:
+        table_number = int(input('Escribe el número de mesa: '))
+        total = float(input('¿Cuál fue la cuenta total de la mesa?: '))
+        tip = float(input('Escribe la propina que el cliente dió: '))
+        calculate_total_count_and_per_person(table_number, total, tip)
+      except KeyError:
+        print('No hay comensales en esta mesa. Primero asigna a un comensal y despúes toma la orden.\nAcciones sugeridas: Asignar una mesa (1).')
       user = int(input('¿Qué deseas hacer ahora?: '))
       continue
     elif user == 4:
