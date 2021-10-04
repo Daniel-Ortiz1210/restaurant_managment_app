@@ -16,6 +16,7 @@ tables = {
   7: {},
 }
 
+print(len(tables))
 def assign_table(table_number, name, vip_status=False):
   if vip_status == 'SI':
     vip_status = True
@@ -61,6 +62,9 @@ def main():
   while user == 1 or user == 2 or user == 3 or user == 4 or user == 5 or user == 6 or user == 7:
     if user == 1:
       table_number = int(input('Escriba el número de mesa: '))
+      if table_number > len(tables):
+        print('Solo tenemos {} mesas dentro del restarante.'.format(len(tables)))
+        table_number = int(input('Escriba el número de mesa correctamente: '))
       names = input('Escriba el nombre de los comensales con apellidos (separados por ", "): ').title().strip().split(', ')
       vip_status = input('¿Presentan acceso VIP? (S/N): ').upper()
       assign_table(table_number, names, vip_status)
