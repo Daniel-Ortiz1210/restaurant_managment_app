@@ -16,7 +16,8 @@ tables = {
   7: {},
 }
 
-print(len(tables))
+instructions = ['Asignar una mesa', 'Tomar una orden', 'Calcular la cuenta de una mesa', 'Consultar el status de una mesa', 'Consultar el status de todas las mesas', 'Desocupar una mesa', 'Para salir del programa']
+
 def assign_table(table_number, name, vip_status=False):
   if vip_status == 'SI':
     vip_status = True
@@ -40,31 +41,23 @@ def calculate_total_count_and_per_person(table_number, total, tip):
     price_per_person = (total + tip) / len(tables[table_number]['name'])
     print('La cuenta total de la mesa {} es ${} pesos mexicanos.\nA cada persona le toca pagar ${} pesos mexicanos.'.format(table_number, total,price_per_person))
 
-def user_option():
+def user_option(instructions):
   user = int(input('¿Qué deseas hacer?: '))
-  while user > 7:
+  while user > len(instructions):
     user = int(input('Escribe una opción valida: '))
   return user
 
-def main():
-  print(
-    '''
-    1. Asignar una mesa
-    2. Tomar una orden
-    3. Calcular la cuenta de una mesa
-    4. Consultar el status de una mesa
-    5. Consultar el status de todas las mesas
-    6. Desocupar una mesa
-    7. Para salir del programa
-    '''
-  )
-  user = user_option()
-  while user == 1 or user == 2 or user == 3 or user == 4 or user == 5 or user == 6 or user == 7:
+def main(instructions):
+  for i in range(len(instructions)):
+    print('{}. {}'.format(i+1, instructions[i]))
+  user = user_option(instructions)
+  while user < len(instructions):
     if user == 1:
       table_number = int(input('Escriba el número de mesa: '))
-      if table_number > len(tables):
+      if table_number > len(tables): # Evitar asignar un cliente a una mesa inexistente
         print('Solo tenemos {} mesas dentro del restarante.'.format(len(tables)))
         table_number = int(input('Escriba el número de mesa correctamente: '))
+      # Añadir feature para evitar asignar mesas ya ocupadas
       names = input('Escriba el nombre de los comensales con apellidos (separados por ", "): ').title().strip().split(', ')
       vip_status = input('¿Presentan acceso VIP? (S/N): ').upper()
       assign_table(table_number, names, vip_status)
@@ -113,4 +106,4 @@ def main():
 
 
 if __name__ == '__main__':
-  main()
+  main(instructions)
