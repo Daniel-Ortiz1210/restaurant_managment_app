@@ -1,19 +1,60 @@
 tables = {
   1: {
-    'name': ['Jiho'],
+    'name': [1],
     'vip_status': False,
     'order': {
-      'drinks': 'Orange Juice, Apple Juice',
+      'drinks': 'Jugo de naranja, Agua Natural',
       'food_items': 'Pancakes',
-      'total': [534.50, 20.0, 5]
     }
   },
-  2: {},
-  3: {},
-  4: {},
-  5: {},
-  6: {},
-  7: {},
+  2: {
+    'name': [1, 2],
+    'vip_status': False,
+    'order': {
+      'drinks': 'Jugo de naranja, Agua Natural',
+      'food_items': 'Pancakes',
+    }
+  },
+  3: {
+    'name': [1, 2, 3],
+    'vip_status': False,
+    'order': {
+      'drinks': 'Jugo de naranja, Agua Natural',
+      'food_items': 'Pancakes',
+    }
+  },
+  4: {
+    'name': [1, 2, 3, 4],
+    'vip_status': False,
+    'order': {
+      'drinks': 'Jugo de naranja, Agua Natural',
+      'food_items': 'Pancakes',
+    }
+  },
+  5: {
+    'name': [1, 2, 3, 4, 5],
+    'vip_status': False,
+    'order': {
+      'drinks': 'Jugo de naranja, Agua Natural',
+      'food_items': 'Pancakes',
+    }
+  },
+  6: {
+    'name': [1, 2, 3, 4, 5, 6],
+    'vip_status': False,
+    'order': {
+      'drinks': 'Jugo de naranja, Agua Natural',
+      'food_items': 'Pancakes',
+    }
+  },
+  7: {
+    'name': [1, 2, 3, 4, 5, 6, 7],
+    'vip_status': False,
+    'order': {
+      'drinks': 'Jugo de naranja, Agua Natural',
+      'food_items': 'Pancakes',
+    }
+  }
 }
 
 instructions = ['Asignar una mesa', 'Tomar una orden', 'Calcular la cuenta de una mesa', 'Consultar el status de una mesa', 'Consultar el status de todas las mesas', 'Desocupar una mesa', 'Para salir del programa']
@@ -47,6 +88,14 @@ def user_option(instructions):
     user = int(input('Escribe una opción valida: '))
   return user
 
+def status_per_table(table_number, num_persons, foods, drinks):
+  print('La mesa {} está ocupada por {} personas.\nHan pedido lo siguiente:\nAlimentos --> {}\nBebidas --> {}'.format(table_number, num_persons, foods, drinks))    
+
+def false_table(table_number):
+    print('Número de mesa inválido')
+    table_number = int(input('Ingrea un número de mesa válido: '))
+    return table_number
+
 def main(instructions):
   for i in range(len(instructions)):
     print('{}. {}'.format(i+1, instructions[i]))
@@ -54,9 +103,8 @@ def main(instructions):
   while user < len(instructions):
     if user == 1:
       table_number = int(input('Escriba el número de mesa: '))
-      if table_number > len(tables): # Evitar asignar un cliente a una mesa inexistente
-        print('Solo tenemos {} mesas dentro del restarante.'.format(len(tables)))
-        table_number = int(input('Escriba el número de mesa correctamente: '))
+      if table_number > len(tables):
+        table_number = false_table(table_number)
       # Añadir feature para evitar asignar mesas ya ocupadas
       names = input('Escriba el nombre de los comensales con apellidos (separados por ", "): ').title().strip().split(', ')
       vip_status = input('¿Presentan acceso VIP? (S/N): ').upper()
@@ -84,7 +132,13 @@ def main(instructions):
       user = int(input('¿Qué deseas hacer ahora?: '))
       continue
     elif user == 4:
-      print('Esta es opción 4')
+      try:
+        table_number = int(input('Escribe el número de mesa: '))
+        if table_number > len(tables):
+          table_number = false_table(table_number)
+        status_per_table(table_number, len(tables[table_number]['name']), tables[table_number]['order']['food_items'], tables[table_number]['order']['drinks'])
+      except KeyError:
+        print('No hay comensales en esta mesa. Primero asigna a un comensal y despúes toma la orden.\nAcciones sugeridas: Asignar una mesa (1).')
       user = int(input('¿Qué deseas hacer ahora?: '))
       continue
     elif user == 5:
