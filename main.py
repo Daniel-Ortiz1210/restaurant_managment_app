@@ -91,6 +91,13 @@ def user_option(instructions):
 def status_per_table(table_number, num_persons, foods, drinks):
   print('La mesa {} está ocupada por {} personas.\nHan pedido lo siguiente:\nAlimentos --> {}\nBebidas --> {}'.format(table_number, num_persons, foods, drinks))    
 
+def overall_status():
+  for num_table in tables:
+    if len(tables[num_table]) >= 1:
+      print('| La mesa {} está ocupada. |'.format(num_table))
+    else:
+      print('La mesa {} está desocupada.'.format(num_table))
+
 def false_table(table_number):
     print('Número de mesa inválido')
     table_number = int(input('Ingrea un número de mesa válido: '))
@@ -149,7 +156,7 @@ def main(instructions):
       user = int(input('¿Qué deseas hacer ahora?: '))
       continue
     elif user == 5:
-      print('Esta es opción 5')
+      overall_status()
       print_instructions(instructions)
       user = int(input('¿Qué deseas hacer ahora?: '))
       continue
