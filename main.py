@@ -1,12 +1,5 @@
 tables = {
-  1: {
-    'name': [1],
-    'vip_status': False,
-    'order': {
-      'drinks': 'Jugo de naranja, Agua Natural',
-      'food_items': 'Pancakes',
-    }
-  },
+  1: {},
   2: {
     'name': [1, 2],
     'vip_status': False,
@@ -80,6 +73,7 @@ def assign_food_items(table_number, **order_items):
 
 def calculate_total_count_and_per_person(table_number, total, tip):
     price_per_person = (total + tip) / len(tables[table_number]['name'])
+    print('... .... ....')
     print('La cuenta total de la mesa {} es ${} pesos mexicanos.\nA cada persona le toca pagar ${} pesos mexicanos.'.format(table_number, total,price_per_person))
 
 def user_option(instructions):
@@ -119,6 +113,7 @@ def main(instructions):
       names = input('Escriba el nombre de los comensales con apellidos (separados por ", "): ').title().strip().split(', ')
       vip_status = input('¿Presentan acceso VIP? (S/N): ').upper()
       assign_table(table_number, names, vip_status)
+      filter = input('Presiona cualquier tecla para continuar: ')
       print_instructions(instructions)
       user = int(input('¿Qué deseas hacer ahora?: '))
       continue
@@ -130,6 +125,7 @@ def main(instructions):
         assign_food_items(table_number, food=order_food, drinks=order_drinks)
       except KeyError:
         print('No hay comensales en esta mesa. Primero asigna a un comensal y despúes toma la orden.\nAcciones sugeridas: Asignar una mesa (1).')
+      filter = input('Presiona cualquier tecla para continuar: ')
       print_instructions(instructions)
       user = int(input('¿Qué deseas hacer ahora?: '))
       continue
@@ -141,6 +137,7 @@ def main(instructions):
         calculate_total_count_and_per_person(table_number, total, tip)
       except KeyError:
         print('No hay comensales en esta mesa. Primero asigna a un comensal y despúes toma la orden.\nAcciones sugeridas: Asignar una mesa (1).')
+      filter = input('Presiona cualquier tecla para continuar: ')
       print_instructions(instructions)
       user = int(input('¿Qué deseas hacer ahora?: '))
       continue
@@ -152,16 +149,18 @@ def main(instructions):
         status_per_table(table_number, len(tables[table_number]['name']), tables[table_number]['order']['food_items'], tables[table_number]['order']['drinks'])
       except KeyError:
         print('No hay comensales en esta mesa. Primero asigna a un comensal y despúes toma la orden.\nAcciones sugeridas: Asignar una mesa (1).')
+      filter = input('Presiona cualquier tecla para continuar: ')
       print_instructions(instructions)
       user = int(input('¿Qué deseas hacer ahora?: '))
       continue
     elif user == 5:
       overall_status()
+      filter = input('Presiona cualquier tecla para continuar: ')
       print_instructions(instructions)
       user = int(input('¿Qué deseas hacer ahora?: '))
       continue
     elif user == 6:
-      print('Esta es la opción 6')
+      filter = input('Presiona cualquier tecla para continuar: ')
       print_instructions(instructions)
       user = int(input('¿Qué deseas hacer ahora?: '))
       continue
