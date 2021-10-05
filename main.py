@@ -96,9 +96,12 @@ def false_table(table_number):
     table_number = int(input('Ingrea un número de mesa válido: '))
     return table_number
 
-def main(instructions):
+def print_instructions(instructions):
   for i in range(len(instructions)):
     print('{}. {}'.format(i+1, instructions[i]))
+
+def main(instructions):
+  print_instructions(instructions)
   user = user_option(instructions)
   while user < len(instructions):
     if user == 1:
@@ -109,6 +112,7 @@ def main(instructions):
       names = input('Escriba el nombre de los comensales con apellidos (separados por ", "): ').title().strip().split(', ')
       vip_status = input('¿Presentan acceso VIP? (S/N): ').upper()
       assign_table(table_number, names, vip_status)
+      print_instructions(instructions)
       user = int(input('¿Qué deseas hacer ahora?: '))
       continue
     elif user == 2:
@@ -119,6 +123,7 @@ def main(instructions):
         assign_food_items(table_number, food=order_food, drinks=order_drinks)
       except KeyError:
         print('No hay comensales en esta mesa. Primero asigna a un comensal y despúes toma la orden.\nAcciones sugeridas: Asignar una mesa (1).')
+      print_instructions(instructions)
       user = int(input('¿Qué deseas hacer ahora?: '))
       continue
     elif user == 3:
@@ -129,6 +134,7 @@ def main(instructions):
         calculate_total_count_and_per_person(table_number, total, tip)
       except KeyError:
         print('No hay comensales en esta mesa. Primero asigna a un comensal y despúes toma la orden.\nAcciones sugeridas: Asignar una mesa (1).')
+      print_instructions(instructions)
       user = int(input('¿Qué deseas hacer ahora?: '))
       continue
     elif user == 4:
@@ -139,19 +145,23 @@ def main(instructions):
         status_per_table(table_number, len(tables[table_number]['name']), tables[table_number]['order']['food_items'], tables[table_number]['order']['drinks'])
       except KeyError:
         print('No hay comensales en esta mesa. Primero asigna a un comensal y despúes toma la orden.\nAcciones sugeridas: Asignar una mesa (1).')
+      print_instructions(instructions)
       user = int(input('¿Qué deseas hacer ahora?: '))
       continue
     elif user == 5:
       print('Esta es opción 5')
+      print_instructions(instructions)
       user = int(input('¿Qué deseas hacer ahora?: '))
       continue
     elif user == 6:
       print('Esta es la opción 6')
+      print_instructions(instructions)
       user = int(input('¿Qué deseas hacer ahora?: '))
       continue
     elif user == 7:
       confirmation = input('¿Estás seguro qué deseas salir? (S/N): ').lower()
       if confirmation == 'no':
+        print_instructions(instructions)
         user = user_option()
         continue
       print('Cerrando sesión...')
