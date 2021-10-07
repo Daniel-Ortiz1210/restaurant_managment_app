@@ -100,14 +100,14 @@ def main(instructions):
   user = user_option(instructions)
   while user <= len(instructions):
     if user == 1: # ---------------------------------------------------
-      print('ASIGNANDO UNA MESA...\n')
+      print('\nASIGNANDO UNA MESA...\n')
       table_number = int(input('Escriba el número de mesa: '))
       names = input('Escriba el nombre de los comensales con apellidos (separados por ", "): ').title().strip().split(', ')
       vip_status = input('¿Presentan acceso VIP? (S/N): ').upper()
       assign_table(table_number, names, vip_status)
       user = int(input('¿Qué deseas hacer ahora?: '))
     elif user == 2: # ---------------------------------------------------
-      print('TOMANDO UNA ORDER...\n')
+      print('\nTOMANDO UNA ORDER...\n')
       try:
         table_number = int(input('Escriba el número de mesa: '))
         print('Primero toma los alimentos y después las bebidas.')
@@ -118,7 +118,7 @@ def main(instructions):
         print('No hay comensales en esta mesa. Primero asigna a un comensal y despúes toma la orden.\nAcciones sugeridas: Asignar una mesa (1).')
       user = int(input('¿Qué deseas hacer ahora?: '))
     elif user == 3: # ---------------------------------------------------
-      print('CALCULANDO LA CUENTA...\n')
+      print('\nCALCULANDO LA CUENTA...\n')
       try:
         table_number = int(input('Escribe el número de mesa: '))
         total = float(input('¿Cuál fue la cuenta total de la mesa?: '))
@@ -133,11 +133,11 @@ def main(instructions):
       status_per_table(table_number, len(tables[table_number]['name']))
       user = int(input('¿Qué deseas hacer ahora?: '))
     elif user == 5: # ---------------------------------------------
-      print('MOSTRANDO STATUS DE TU RESTAURANTE...\n')
+      print('\nMOSTRANDO STATUS DE TU RESTAURANTE...\n')
       overall_status()
       user = int(input('¿Qué deseas hacer ahora?: '))
     elif user == 6: # ---------------------------------------------
-      print('VACIANDO UNA MESA...')
+      print('\nVACIANDO UNA MESA...')
       table_number = int(input('Escribe el número de mesa: '))
       empty_table(table_number)
       user = int(input('¿Qué deseas hacer ahora?: '))
